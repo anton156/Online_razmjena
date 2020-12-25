@@ -6,6 +6,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using Online_razmjena.Models;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.EntityFrameworkCore;
+using ReflectionIT.Mvc.Paging;
 
 namespace Online_razmjena.Controllers
 {
@@ -20,10 +22,20 @@ namespace Online_razmjena.Controllers
             this.userManager = userManager;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index(string search, int page = 1)
         {
-            var roles = roleManager.Roles.ToList();
-            return View(roles);
+            if (!String.IsNullOrEmpty(search))
+            {
+                var roles = roleManager.Roles.AsNoTracking().Where(x => x.Name.Contains(search)).OrderBy(s => s.Id);
+                //var model = await PagingList.CreateAsync(roles, 5, page);
+                return View(roles);
+            }
+            else
+            {
+                var roles = roleManager.Roles.AsNoTracking().OrderBy(s => s.Id);
+                //var model = await PagingList.CreateAsync(roles, 5, page);
+                return View(roles);
+            }
         }
 
         public IActionResult Create()
@@ -86,40 +98,41 @@ namespace Online_razmjena.Controllers
         [HttpGet]
         public async Task<IActionResult> EditUsersInRole(string roleId)
         {
-            ViewBag.roleId = roleId;
+                ViewBag.roleId = roleId;
 
-            var role = await roleManager.FindByIdAsync(roleId);
+                var role = await roleManager.FindByIdAsync(roleId);
 
-            if (role == null)
-            {
-                ViewBag.ErrorMessage = $"Role with Id = {roleId} cannot be found";
-                return View("NotFound");
-            }
-
-            var model = new List<UserRoleViewModel>();
-
-            foreach (var user in userManager.Users)
-            {
-                var userRoleViewModel = new UserRoleViewModel
+                if (role == null)
                 {
-                    UserId = user.Id,
-                    UserName = user.UserName
-                };
-
-                if (await userManager.IsInRoleAsync(user, role.Name))
-                {
-                    userRoleViewModel.IsSelected = true;
-                }
-                else
-                {
-                    userRoleViewModel.IsSelected = false;
+                    ViewBag.ErrorMessage = $"Role with Id = {roleId} cannot be found";
+                    return View("NotFound");
                 }
 
-                model.Add(userRoleViewModel);
-            }
+                var model = new List<UserRoleViewModel>();
 
-            return View(model);
-        }
+                foreach (var user in userManager.Users)
+                {
+                    var userRoleViewModel = new UserRoleViewModel
+                    {
+                        UserId = user.Id,
+                        UserName = user.UserName
+                    };
+
+                    if (await userManager.IsInRoleAsync(user, role.Name))
+                    {
+                        userRoleViewModel.IsSelected = true;
+                    }
+                    else
+                    {
+                        userRoleViewModel.IsSelected = false;
+                    }
+
+                    model.Add(userRoleViewModel);
+                }
+
+                return View(model);
+            }
+        
 
         [HttpPost]
         public async Task<IActionResult> EditUsersInRole(List<UserRoleViewModel> model, string roleId)
