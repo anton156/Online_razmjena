@@ -38,6 +38,12 @@ namespace Online_razmjena
                  .AddDefaultUI()
                  .AddEntityFrameworkStores<ApplicationDbContext>()
                  .AddDefaultTokenProviders();
+            services.AddMvc();
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy("RequireAdmin", policy =>
+                       policy.RequireRole("Admin"));
+            });
             services.AddControllersWithViews();
             services.AddRazorPages();
         }
