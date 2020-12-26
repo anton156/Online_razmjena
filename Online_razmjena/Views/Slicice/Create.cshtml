@@ -1,0 +1,73 @@
+﻿@model SliciceModel
+@{
+    ViewData["Title"] = "Nova slicica";
+}
+<div class="container">
+    <h3 class="display-4">Nova slicica</h3>
+    <hr />
+    @if (ViewBag.IsSuccess == true)
+    {
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <strong>Uspjeh</strong> Nova slicica je dodana. <br />
+            Klikni <a asp-controller="Slicice" asp-action="GetBook" asp-route-id="@ViewBag.SliciceId">ovdje</a> za detalje
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    }
+
+<form method="post" enctype="multipart/form-data" asp-action="Create" asp-controller="Slicice">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+    <div class="form-group">
+        <label asp-for="Naziv" class="control-label"></label>
+        <input asp-for="Naziv" class="form-control" />
+        <span asp-validation-for="Naziv" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="BrojSlicica" class="control-label"></label>
+        <input asp-for="BrojSlicica" class="form-control" />
+        <span asp-validation-for="BrojSlicica" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Kontakt" class="control-label"></label>
+        <input asp-for="Kontakt" class="form-control" />
+        <span asp-validation-for="Kontakt" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Opis" class="control-label"></label>
+        <textarea asp-for="Opis" class="form-control"></textarea>
+        <span asp-validation-for="Opis" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="DodatneInformacije" class="control-label"></label>
+        <textarea asp-for="DodatneInformacije" class="form-control"></textarea>
+        <span asp-validation-for="DodatneInformacije" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="CoverPhoto" class="control-label"></label>
+        <div class="custom-file">
+            <input asp-for="CoverPhoto" class="custom-file-input" id="customFile">
+            <label class="custom-file-label" for="customFile">Odaberi glavnu sliku</label>
+        </div>
+        <span asp-validation-for="CoverPhoto" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="GalleryFiles" class="control-label"></label>
+        <div class="custom-file">
+            <input asp-for="GalleryFiles" class="custom-file-input" id="customFile">
+            <label class="custom-file-label" for="customFile">Odaberi slike</label>
+        </div>
+        <span asp-validation-for="GalleryFiles" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <input type="submit" value="Dodaj slicice" class="btn btn-primary" />
+    </div>
+</form>
+</div>

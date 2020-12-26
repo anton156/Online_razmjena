@@ -12,5 +12,9 @@ namespace Online_razmjena.Data
             : base(options)
         {
         }
+
+        public DbSet<Slicice> Slicice { get; set; }
+
+        public DbSet<SliciceGallery> SliciceGallery { get; set; }
     }
 }

@@ -15,4 +15,9 @@
     <PackageReference Include="ReflectionIT.Mvc.Paging" Version="5.1.1" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\slicice\cover\" />
+    <Folder Include="wwwroot\slicice\gallery\" />
+  </ItemGroup>
+
 </Project>
