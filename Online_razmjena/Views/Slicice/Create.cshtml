@@ -20,7 +20,7 @@
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
     <div class="form-group">
-        <input asp-for="Korisnik" class="form-control" value="@User.Identity.Name"/>
+        <input asp-for="Korisnik" hidden class="form-control" value="@User.Identity.Name"/>
         <span asp-validation-for="Korisnik" class="text-danger"></span>
     </div>
     <div class="form-group">
