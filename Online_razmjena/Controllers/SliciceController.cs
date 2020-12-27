@@ -34,8 +34,8 @@ namespace Online_razmjena.Controllers
             return View(data);
         }
 
-        [Route("slicice-details/{id:int:min(1)}", Name = "sliciceDetailsRoute")]
-        public async Task<ViewResult> GetBook(int id)
+        [Route("slicice-details/{id:int:min(1)}", Name = "Details")]
+        public async Task<ViewResult> Details(int id)
         {
             var data = await _sliciceRepository.GetSliciceById(id);
 
