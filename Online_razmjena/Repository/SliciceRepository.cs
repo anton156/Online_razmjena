@@ -25,6 +25,7 @@ namespace Online_razmjena.Repository
             {
                 Kontakt = model.Kontakt,
                 CreatedOn = DateTime.UtcNow,
+                Korisnik = model.Korisnik,
                 Opis = model.Opis,
                 Naziv = model.Naziv,
                 BrojSlicica = model.BrojSlicica,
@@ -57,6 +58,7 @@ namespace Online_razmjena.Repository
                   .Select(slicice => new SliciceModel()
                   {
                       Kontakt = slicice.Kontakt,
+                      Korisnik = slicice.Korisnik,
                       Naziv = slicice.Naziv,
                       Opis = slicice.Opis,
                       Id = slicice.Id,
@@ -71,6 +73,7 @@ namespace Online_razmjena.Repository
                  .Select(slicice => new SliciceModel()
                  {
                      Kontakt = slicice.Kontakt,
+                     Korisnik = slicice.Korisnik,
                      Naziv = slicice.Naziv,
                      Opis = slicice.Opis,
                      Id = slicice.Id,

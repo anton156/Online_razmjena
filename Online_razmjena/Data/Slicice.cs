@@ -9,6 +9,7 @@ namespace Online_razmjena.Data
     {
         public int Id { get; set; }
         public string Naziv { get; set; }
+        public string Korisnik { get; set; }
         public string BrojSlicica { get; set; }
         public string Opis { get; set; }
         public string Kontakt { get; set; }

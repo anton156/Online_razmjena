@@ -19,6 +19,7 @@ namespace Online_razmjena.Models
         public string Opis { get; set; }
 
         public string Kontakt { get; set; }
+        public string Korisnik { get; set; }
 
         [Display(Name = "Unesite dodatne podatke koje želite")]
         public string DodatneInformacije { get; set; }
