@@ -33,6 +33,12 @@ namespace Online_razmjena.Controllers
 
             return View(data);
         }
+        public async Task<ViewResult> MySlicice()
+        {
+            var data = await _sliciceRepository.Index();
+
+            return View(data);
+        }
 
         [Route("slicice-details/{id:int:min(1)}", Name = "Details")]
         public async Task<ViewResult> Details(int id)
