@@ -96,20 +96,47 @@ namespace Online_razmjena.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> EditUsersInRole(string roleId)
+        public async Task<IActionResult> EditUsersInRole(string search, string roleId)
         {
-                ViewBag.roleId = roleId;
+            ViewBag.roleId = roleId;
 
-                var role = await roleManager.FindByIdAsync(roleId);
+            var role = await roleManager.FindByIdAsync(roleId);
 
-                if (role == null)
+            if (role == null)
+            {
+                ViewBag.ErrorMessage = $"Role with Id = {roleId} cannot be found";
+                return View("NotFound");
+            }
+
+            var model = new List<UserRoleViewModel>();
+            if (!String.IsNullOrEmpty(search))
+            {
+                foreach (var user in userManager.Users)
                 {
-                    ViewBag.ErrorMessage = $"Role with Id = {roleId} cannot be found";
-                    return View("NotFound");
+                    if (user.UserName.Contains(search))
+                    {
+                        var userRoleViewModel = new UserRoleViewModel
+                        {
+                            UserId = user.Id,
+                            UserName = user.UserName
+                        };
+
+                        if (await userManager.IsInRoleAsync(user, role.Name))
+                        {
+                            userRoleViewModel.IsSelected = true;
+                        }
+                        else
+                        {
+                            userRoleViewModel.IsSelected = false;
+                        }
+
+                        model.Add(userRoleViewModel);
+                    }
                 }
-
-                var model = new List<UserRoleViewModel>();
-
+                return View(model);
+            }
+            else
+            {
                 foreach (var user in userManager.Users)
                 {
                     var userRoleViewModel = new UserRoleViewModel
@@ -129,9 +156,11 @@ namespace Online_razmjena.Controllers
 
                     model.Add(userRoleViewModel);
                 }
-
                 return View(model);
             }
+            
+        }
+            
         
 
         [HttpPost]

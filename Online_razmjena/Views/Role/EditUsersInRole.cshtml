@@ -3,7 +3,13 @@
 @{
     var roleId = ViewBag.roleId;
 }
-
+<p>
+    @using (Html.BeginForm("EditUsersInRole", "Role", FormMethod.Get))
+    {
+        @Html.Hidden("roleId")<input style="margin-left:4px;" hidden class="form-control" value="@roleId" />
+        @Html.TextBox("search")<input style="margin-left:4px;" type="submit" asp-route-roleId="@roleId" value="Pretraži" />
+    }
+</p>
 <form method="post">
     <div class="card">
         <div class="card-header">
@@ -25,7 +31,7 @@
         <div class="card-footer">
             <input type="submit" value="Update" class="btn btn-primary"
                    style="width:auto" />
-            <a asp-action="EditRole" asp-route-id="@roleId"
+            <a asp-action="Update" asp-route-id="@roleId"
                class="btn btn-primary" style="width:auto">Cancel</a>
         </div>
     </div>
