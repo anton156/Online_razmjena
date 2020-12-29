@@ -3,6 +3,12 @@
 }
 @model IEnumerable<SliciceModel>
 
+<p>
+    @using (Html.BeginForm("Index", "Slicice", FormMethod.Get))
+    {
+        @Html.TextBox("search")<input style="margin-left:4px;" type="submit" value="Pretraži" />
+    }
+</p>
 <div class="container">
     <h3 class="display-4">Sličice</h3>
     <div class="row">

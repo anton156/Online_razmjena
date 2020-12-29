@@ -52,9 +52,11 @@ namespace Online_razmjena.Repository
 
         }
 
-        public async Task<List<SliciceModel>> Index()
+        public async Task<List<SliciceModel>> Index(string search)
         {
-            return await _context.Slicice
+            if (!String.IsNullOrEmpty(search))
+            {
+                return await _context.Slicice.Where(x => x.Naziv.Contains(search))
                   .Select(slicice => new SliciceModel()
                   {
                       Kontakt = slicice.Kontakt,
@@ -66,6 +68,23 @@ namespace Online_razmjena.Repository
                       DodatneInformacije = slicice.DodatneInformacije,
                       CoverImageUrl = slicice.CoverImageUrl
                   }).ToListAsync();
+            }
+            else
+            {
+                return await _context.Slicice
+                  .Select(slicice => new SliciceModel()
+                  {
+                      Kontakt = slicice.Kontakt,
+                      Korisnik = slicice.Korisnik,
+                      Naziv = slicice.Naziv,
+                      Opis = slicice.Opis,
+                      Id = slicice.Id,
+                      BrojSlicica = slicice.BrojSlicica,
+                      DodatneInformacije = slicice.DodatneInformacije,
+                      CoverImageUrl = slicice.CoverImageUrl
+                  }).ToListAsync();
+
+            }
         }
         public async Task<SliciceModel> GetSliciceById(int id)
         {

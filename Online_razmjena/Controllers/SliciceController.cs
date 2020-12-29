@@ -27,15 +27,15 @@ namespace Online_razmjena.Controllers
         }
 
         
-        public async Task<ViewResult> Index()
+        public async Task<ViewResult> Index(string search)
         {
-            var data = await _sliciceRepository.Index();
+            var data = await _sliciceRepository.Index(search);
 
             return View(data);
         }
-        public async Task<ViewResult> MySlicice()
+        public async Task<ViewResult> MySlicice(string search)
         {
-            var data = await _sliciceRepository.Index();
+            var data = await _sliciceRepository.Index(search);
 
             return View(data);
         }
