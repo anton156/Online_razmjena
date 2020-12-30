@@ -17,11 +17,13 @@ namespace Online_razmjena.Controllers
     {
         
         private readonly SliciceRepository _sliciceRepository = null;
+        private readonly ApplicationDbContext _context = null;
         private readonly IWebHostEnvironment _webHostEnvironment;
 
         public SliciceController(SliciceRepository sliciceRepository,
-            IWebHostEnvironment webHostEnvironment)
+            IWebHostEnvironment webHostEnvironment, ApplicationDbContext context)
         {
+            _context = context;
             _sliciceRepository = sliciceRepository;
             _webHostEnvironment = webHostEnvironment;
         }
@@ -46,6 +48,14 @@ namespace Online_razmjena.Controllers
             var data = await _sliciceRepository.GetSliciceById(id);
 
             return View(data);
+        }
+        [HttpPost]
+        public async Task<IActionResult> Delete(int id)
+        {
+            var slicica = await _context.Slicice.FindAsync(id);
+            _context.Slicice.Remove(slicica);
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(MySlicice));
         }
 
         public List<SliciceModel> SearchSlicice(string sliciceNaziv)
