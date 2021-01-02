@@ -16,11 +16,11 @@ namespace Online_razmjena.Controllers
     public class SliciceController : Controller
     {
         
-        private readonly SliciceRepository _sliciceRepository = null;
+        private readonly ISliciceRepository _sliciceRepository = null;
         private readonly ApplicationDbContext _context = null;
         private readonly IWebHostEnvironment _webHostEnvironment;
 
-        public SliciceController(SliciceRepository sliciceRepository,
+        public SliciceController(ISliciceRepository sliciceRepository,
             IWebHostEnvironment webHostEnvironment, ApplicationDbContext context)
         {
             _context = context;

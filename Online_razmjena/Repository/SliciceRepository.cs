@@ -9,10 +9,10 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Online_razmjena.Repository
 {
-    public class SliciceRepository
+    public class SliciceRepository : ISliciceRepository
     {
         private readonly ApplicationDbContext _context = null;
-        
+
 
         public SliciceRepository(ApplicationDbContext context)
         {
@@ -104,7 +104,7 @@ namespace Online_razmjena.Repository
                          Id = g.Id,
                          Naziv = g.Naziv,
                          URL = g.URL
-                     }).ToList()                    
+                     }).ToList()
                  }).FirstOrDefaultAsync();
         }
 

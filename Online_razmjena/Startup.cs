@@ -49,7 +49,7 @@ namespace Online_razmjena
             });
             services.AddControllersWithViews();
             services.AddRazorPages();
-            services.AddScoped<SliciceRepository, SliciceRepository>();
+            services.AddScoped<ISliciceRepository, SliciceRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
