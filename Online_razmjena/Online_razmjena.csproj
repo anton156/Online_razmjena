@@ -18,6 +18,7 @@
   <ItemGroup>
     <Folder Include="wwwroot\slicice\cover\" />
     <Folder Include="wwwroot\slicice\gallery\" />
+    <Folder Include="wwwroot\slicice\post\" />
   </ItemGroup>
 
 </Project>

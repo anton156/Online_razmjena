@@ -16,5 +16,7 @@ namespace Online_razmjena.Data
         public DbSet<Slicice> Slicice { get; set; }
 
         public DbSet<SliciceGallery> SliciceGallery { get; set; }
+
+        public DbSet<Post> Posts { get; set; }
     }
 }

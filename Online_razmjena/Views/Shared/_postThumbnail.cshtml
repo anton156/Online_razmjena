@@ -1,0 +1,21 @@
+﻿@model Post
+
+<div class="card mb-4 shadow-sm">
+    @if (!String.IsNullOrEmpty(Model.Image))
+    {
+        var image_path = $"/Image/{Model.Image}";
+        <img src="@image_path" />
+    }
+    
+    <div class="card-body">
+        <h3 class="card-title">@(string.IsNullOrEmpty(Model.Naziv) ? "Naziv nije dostupan" : Model.Naziv)</h3>
+        <p class="card-text">@(string.IsNullOrEmpty(Model.Korisnik) ? "Nema Opisa": Model.Korisnik)</p>
+        <div class="d-flex justify-content-between align-items-center">
+            <div class="btn-group">
+                <a asp-controller="Home" asp-action="Post" asp-route-id="@Model.Id"
+                   class="btn btn-sm btn-outline-secondary">Detalji</a>
+            </div>
+            <small class="text-muted">@(string.IsNullOrEmpty(Model.Tip) ? "NA" : Model.Tip)</small>
+        </div>
+    </div>
+</div>

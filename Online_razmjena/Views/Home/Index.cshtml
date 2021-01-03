@@ -1,8 +1,24 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Post";
 }
+@model IEnumerable<Post>
 
-<div class="text-center">
-        <h1 class="display-4">Welcome</h1>
-        <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+@*<p>
+    @using (Html.BeginForm("Index", "Slicice", FormMethod.Get))
+    {
+        @Html.TextBox("search")<input style="margin-left:4px;" type="submit" value="Pretraži" />
+    }
+</p>*@
+<div class="container">
+    <h3 class="display-4">Post</h3>
+    <div class="row">
+
+        @foreach (var post in Model)
+        {
+            <div class="col-md-4">
+                <partial name="_postThumbnail" model="@post" />
+            </div>
+        }
+
     </div>
+</div>

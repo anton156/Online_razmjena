@@ -14,7 +14,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using ReflectionIT.Mvc.Paging;
 using Online_razmjena.Repository;
-
+using Online_razmjena.Data.FileManager;
 
 namespace Online_razmjena
 {
@@ -50,6 +50,8 @@ namespace Online_razmjena
             services.AddControllersWithViews();
             services.AddRazorPages();
             services.AddScoped<ISliciceRepository, SliciceRepository>();
+            services.AddTransient<IPostRepository, PostRepository>();
+            services.AddTransient<IFileManager, FileManager>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
