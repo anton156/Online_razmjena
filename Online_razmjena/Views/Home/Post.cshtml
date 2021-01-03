@@ -52,4 +52,34 @@
     </div>
 
     <hr />
+    <div class="comment-section">
+        @{
+            await Html.RenderPartialAsync("_MainComment", new CommentViewModel { PostId = Model.Id, MainCommentId = 0, Korisnik = Model.Korisnik });
+        }
+        @foreach (var c in Model.MainComments)
+        {
+            <p>
+                @c.Message
+            </p>
+            <p>
+                @c.Korisnik --- @c.Created
+            </p>
+            <div style="margin-left: 20px;">
+                <h4>Sub Comment</h4>
+                @{
+                    await Html.RenderPartialAsync("_MainComment", new CommentViewModel { PostId = Model.Id, MainCommentId = c.Id, Korisnik = Model.Korisnik });
+                }
+
+                @foreach (var sc in c.SubComments)
+                {
+                    <p>
+                        @sc.Message
+                    </p>
+                    <p>
+                        @sc.Korisnik --- @sc.Created
+                    </p>
+                }
+            </div>
+        }
+    </div>
 </div>

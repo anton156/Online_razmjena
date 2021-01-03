@@ -7,5 +7,6 @@ namespace Online_razmjena.Models.Comments
 {
     public class MainComment : Comment
     {
+        public List<SubComment> SubComments { get; set; }
     }
 }

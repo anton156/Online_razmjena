@@ -1,4 +1,6 @@
-﻿using Online_razmjena.Data;
+﻿using Microsoft.EntityFrameworkCore;
+using Online_razmjena.Data;
+using Online_razmjena.Models.Comments;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,7 +29,10 @@ namespace Online_razmjena.Repository
 
         public Post GetPost(int id)
         {
-            return _contex.Posts.FirstOrDefault(p => p.Id == id);
+            return _contex.Posts
+                .Include(p => p.MainComments)
+                    .ThenInclude(mc => mc.SubComments)
+                .FirstOrDefault(p => p.Id == id);
 
         }
 
@@ -49,6 +54,11 @@ namespace Online_razmjena.Repository
                 return true;
             }
             return false;
+        }
+
+        public void AddSubComment(SubComment comment)
+        {
+            _contex.SubComments.Add(comment);
         }
     }
 }

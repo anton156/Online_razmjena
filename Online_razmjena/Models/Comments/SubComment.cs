@@ -7,5 +7,6 @@ namespace Online_razmjena.Models.Comments
 {
     public class SubComment : Comment
     {
+        public int MainCommentId { get; set; }
     }
 }

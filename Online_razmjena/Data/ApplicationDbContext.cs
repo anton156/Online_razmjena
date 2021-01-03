@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using Online_razmjena.Models.Comments;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -18,5 +19,8 @@ namespace Online_razmjena.Data
         public DbSet<SliciceGallery> SliciceGallery { get; set; }
 
         public DbSet<Post> Posts { get; set; }
+        public DbSet<MainComment> MainComments { get; set; }
+        public DbSet<SubComment> SubComments { get; set; }
+
     }
 }
