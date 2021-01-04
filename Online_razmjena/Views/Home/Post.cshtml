@@ -59,24 +59,24 @@
         @foreach (var c in Model.MainComments)
         {
             <p>
-                @c.Message
+                @c.Korisnik --- @c.Created
             </p>
             <p>
-                @c.Korisnik --- @c.Created
+                @c.Message
             </p>
             <div style="margin-left: 20px;">
                 <h4>Sub Comment</h4>
                 @{
-                    await Html.RenderPartialAsync("_MainComment", new CommentViewModel { PostId = Model.Id, MainCommentId = c.Id, Korisnik = Model.Korisnik });
+                    await Html.RenderPartialAsync("_SubComment", new CommentViewModel { PostId = Model.Id, MainCommentId = c.Id, Korisnik = Model.Korisnik });
                 }
 
                 @foreach (var sc in c.SubComments)
                 {
                     <p>
-                        @sc.Message
+                        @sc.Korisnik --- @sc.Created
                     </p>
                     <p>
-                        @sc.Korisnik --- @sc.Created
+                        @sc.Message
                     </p>
                 }
             </div>
