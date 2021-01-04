@@ -8,8 +8,11 @@
         <input asp-for="PostId" type="hidden" />
         <input asp-for="MainCommentId" type="hidden" />
         <input asp-for="Korisnik" type="hidden" />
-        <input asp-for="Message" />
-        <button type="submit">Pošalji</button>
-
+        <div class="form-group">
+            <textarea style="width: 400px;" asp-for="Message" class="form-control"></textarea>
+            <button style="width: 400px; border-top:none;" class="form-control" type="submit">Odgovori</button>
+        </div>
+            
+            
     </form>
 </div>
