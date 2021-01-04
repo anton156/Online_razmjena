@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Online_razmjena.Data;
 using Online_razmjena.Data.FileManager;
@@ -36,6 +37,7 @@ namespace Online_razmjena.Controllers
             var post = _repo.GetPost(id);
             return View(post);
         }
+        [Authorize]
         [HttpGet]
         public IActionResult Edit(int? id)
         {
@@ -56,6 +58,7 @@ namespace Online_razmjena.Controllers
                 });
             }
         }
+        [Authorize]
         [HttpPost]
         public async Task<IActionResult> Edit(PostViewModel vm)
         {
@@ -82,6 +85,7 @@ namespace Online_razmjena.Controllers
                     return View(post);
             
         }
+        [Authorize]
         [HttpGet]
         public async Task<IActionResult> Remove(int id)
         {
@@ -95,6 +99,7 @@ namespace Online_razmjena.Controllers
             var mime = image.Substring(image.LastIndexOf('.') + 1);
             return new FileStreamResult(_fileManager.ImageStream(image), $"image/{mime}");
         }
+        [Authorize]
         [HttpPost]
         public async Task<IActionResult> Comment(CommentViewModel vm)
         {

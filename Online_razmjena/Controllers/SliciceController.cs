@@ -35,6 +35,7 @@ namespace Online_razmjena.Controllers
 
             return View(data);
         }
+        [Authorize]
         public async Task<ViewResult> MySlicice(string search)
         {
             var data = await _sliciceRepository.Index(search);
@@ -49,6 +50,7 @@ namespace Online_razmjena.Controllers
 
             return View(data);
         }
+        [Authorize]
         [HttpPost]
         public async Task<IActionResult> Delete(int id)
         {
@@ -72,7 +74,7 @@ namespace Online_razmjena.Controllers
             ViewBag.SliciceId = sliciceId;
             return View(model);
         }
-
+        [Authorize]
         [HttpPost]
         public async Task<IActionResult> Create(SliciceModel sliciceModel)
         {
