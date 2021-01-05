@@ -3,7 +3,24 @@
 }
 @model Post
 
+<style>
 
+    #minus {
+        display: inline;
+    }
+
+    .collapsed #minus {
+        display: none;
+    }
+
+    #plus {
+        display: none;
+    }
+
+    .collapsed #plus {
+        display: inline;
+    }
+</style>
 <div class="container">
     <h3 class="display-4">Objava</h3>
     <div class="row">
@@ -66,21 +83,24 @@
                 @c.Message
             </p>
             <div style="margin-left: 20px;">
-                <h4>Sub Comment</h4>
-                @{
-                    await Html.RenderPartialAsync("_SubComment", new CommentViewModel { PostId = Model.Id, MainCommentId = c.Id, Korisnik = Model.Korisnik });
-                }
+                <a  class="label col-form-label-lg" style="color: lightblue" data-toggle="collapse" data-target="#demo"><span id="plus">+ Odgovori</span><span id="minus">- Zatvori</span></a>
+                <div id="demo" class="collapse">
+                    @{
+                        await Html.RenderPartialAsync("_SubComment", new CommentViewModel { PostId = Model.Id, MainCommentId = c.Id, Korisnik = Model.Korisnik });
+                    }
 
-                @foreach (var sc in c.SubComments)
-                {
-                    <p>
-                        @sc.Korisnik --- @sc.Created
-                    </p>
-                    <p>
-                        @sc.Message
-                    </p>
-                }
+                    @foreach (var sc in c.SubComments)
+                    {
+                        <p>
+                            @sc.Korisnik --- @sc.Created
+                        </p>
+                        <p>
+                            @sc.Message
+                        </p>
+                    }
+                </div>
+
             </div>
-        }
-    </div>
+                    }
+            </div>
 </div>
