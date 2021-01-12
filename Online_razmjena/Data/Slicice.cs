@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Online_razmjena.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -11,6 +12,12 @@ namespace Online_razmjena.Data
         public string Naziv { get; set; }
         public string Korisnik { get; set; }
         public string BrojSlicica { get; set; }
+        public string Izdavac { get; set; }
+        public int GodinaIzdanja { get; set; }
+        public int AlbumId { get; set; }
+        public virtual AlbumModel AlbumModel { get; set; }
+        public int ZamjenaId { get; set; }
+        public virtual ZamjenaModel ZamjenaModel { get; set; }
         public string Opis { get; set; }
         public string Kontakt { get; set; }
         public string DodatneInformacije { get; set; }

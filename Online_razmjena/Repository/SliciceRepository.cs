@@ -24,6 +24,10 @@ namespace Online_razmjena.Repository
             var newSlicice = new Slicice()
             {
                 Kontakt = model.Kontakt,
+                Izdavac = model.Izdavac,
+                GodinaIzdanja = model.GodinaIzdanja,
+                AlbumId = model.AlbumId,
+                ZamjenaId = model.ZamjenaId,
                 CreatedOn = DateTime.UtcNow,
                 Korisnik = model.Korisnik,
                 Opis = model.Opis,
@@ -92,6 +96,10 @@ namespace Online_razmjena.Repository
                  .Select(slicice => new SliciceModel()
                  {
                      Kontakt = slicice.Kontakt,
+                     Izdavac = slicice.Izdavac,
+                     GodinaIzdanja = slicice.GodinaIzdanja,
+                     AlbumId = slicice.AlbumId,
+                     ZamjenaId = slicice.ZamjenaId,
                      Korisnik = slicice.Korisnik,
                      Naziv = slicice.Naziv,
                      Opis = slicice.Opis,

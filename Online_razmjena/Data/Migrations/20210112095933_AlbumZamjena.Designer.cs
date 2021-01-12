@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Online_razmjena.Data;
 
 namespace Online_razmjena.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210112095933_AlbumZamjena")]
+    partial class AlbumZamjena
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -252,12 +254,6 @@ namespace Online_razmjena.Data.Migrations
                         .HasColumnType("int")
                         .UseIdentityColumn();
 
-                    b.Property<int>("AlbumId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("AlbumModelAlbumId")
-                        .HasColumnType("int");
-
                     b.Property<string>("BrojSlicica")
                         .HasColumnType("nvarchar(max)");
 
@@ -291,17 +287,7 @@ namespace Online_razmjena.Data.Migrations
                     b.Property<DateTime?>("UpdatedOn")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("ZamjenaId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("ZamjenaModelZamjenaId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("AlbumModelAlbumId");
-
-                    b.HasIndex("ZamjenaModelZamjenaId");
 
                     b.ToTable("Slicice");
                 });
@@ -397,6 +383,87 @@ namespace Online_razmjena.Data.Migrations
                     b.ToTable("SubComments");
                 });
 
+            modelBuilder.Entity("Online_razmjena.Models.GalleryModel", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .UseIdentityColumn();
+
+                    b.Property<string>("Naziv")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("SliciceModelId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("URL")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("SliciceModelId");
+
+                    b.ToTable("GalleryModel");
+                });
+
+            modelBuilder.Entity("Online_razmjena.Models.SliciceModel", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .UseIdentityColumn();
+
+                    b.Property<int>("AlbumId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("AlbumModelAlbumId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("BrojSlicica")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CoverImageUrl")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("DodatneInformacije")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("GodinaIzdanja")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Izdavac")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Kontakt")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Korisnik")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Naziv")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
+
+                    b.Property<string>("Opis")
+                        .HasMaxLength(10000)
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("ZamjenaId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("ZamjenaModelZamjenaId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AlbumModelAlbumId");
+
+                    b.HasIndex("ZamjenaModelZamjenaId");
+
+                    b.ToTable("SliciceModel");
+                });
+
             modelBuilder.Entity("Online_razmjena.Models.ZamjenaModel", b =>
                 {
                     b.Property<int>("ZamjenaId")
@@ -464,21 +531,6 @@ namespace Online_razmjena.Data.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Online_razmjena.Data.Slicice", b =>
-                {
-                    b.HasOne("Online_razmjena.Models.AlbumModel", "AlbumModel")
-                        .WithMany("Slicice")
-                        .HasForeignKey("AlbumModelAlbumId");
-
-                    b.HasOne("Online_razmjena.Models.ZamjenaModel", "ZamjenaModel")
-                        .WithMany("Slicice")
-                        .HasForeignKey("ZamjenaModelZamjenaId");
-
-                    b.Navigation("AlbumModel");
-
-                    b.Navigation("ZamjenaModel");
-                });
-
             modelBuilder.Entity("Online_razmjena.Data.SliciceGallery", b =>
                 {
                     b.HasOne("Online_razmjena.Data.Slicice", "Slicica")
@@ -506,6 +558,28 @@ namespace Online_razmjena.Data.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("Online_razmjena.Models.GalleryModel", b =>
+                {
+                    b.HasOne("Online_razmjena.Models.SliciceModel", null)
+                        .WithMany("Gallery")
+                        .HasForeignKey("SliciceModelId");
+                });
+
+            modelBuilder.Entity("Online_razmjena.Models.SliciceModel", b =>
+                {
+                    b.HasOne("Online_razmjena.Models.AlbumModel", "AlbumModel")
+                        .WithMany("Slicice")
+                        .HasForeignKey("AlbumModelAlbumId");
+
+                    b.HasOne("Online_razmjena.Models.ZamjenaModel", "ZamjenaModel")
+                        .WithMany("Slicice")
+                        .HasForeignKey("ZamjenaModelZamjenaId");
+
+                    b.Navigation("AlbumModel");
+
+                    b.Navigation("ZamjenaModel");
+                });
+
             modelBuilder.Entity("Online_razmjena.Data.Post", b =>
                 {
                     b.Navigation("MainComments");
@@ -524,6 +598,11 @@ namespace Online_razmjena.Data.Migrations
             modelBuilder.Entity("Online_razmjena.Models.Comments.MainComment", b =>
                 {
                     b.Navigation("SubComments");
+                });
+
+            modelBuilder.Entity("Online_razmjena.Models.SliciceModel", b =>
+                {
+                    b.Navigation("Gallery");
                 });
 
             modelBuilder.Entity("Online_razmjena.Models.ZamjenaModel", b =>

@@ -20,13 +20,21 @@
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
     <div class="form-group">
-        <input asp-for="Korisnik" hidden class="form-control" value="@User.Identity.Name"/>
+        <input asp-for="Korisnik" hidden class="form-control" value="@User.Identity.Name" />
         <span asp-validation-for="Korisnik" class="text-danger"></span>
     </div>
     <div class="form-group">
         <label asp-for="Naziv" class="control-label"></label>
         <input asp-for="Naziv" class="form-control" />
         <span asp-validation-for="Naziv" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="AlbumId" class="control-label"></label>
+        <select asp-for="AlbumId" class="form-control" asp-items="ViewBag.AlbumId"></select>
+    </div>
+    <div class="form-group">
+        <label asp-for="ZamjenaId" class="control-label"></label>
+        <select asp-for="ZamjenaId" class="form-control" asp-items="ViewBag.ZamjenaId"></select>
     </div>
 
     <div class="form-group">
@@ -40,6 +48,17 @@
         <input asp-for="Kontakt" class="form-control" />
         <span asp-validation-for="Kontakt" class="text-danger"></span>
     </div>
+    <div class="form-group">
+        <label asp-for="Izdavac" class="control-label"></label>
+        <input asp-for="Izdavac" class="form-control" />
+        <span asp-validation-for="Izdavac" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="GodinaIzdanja" class="control-label"></label>
+        <input asp-for="GodinaIzdanja" class="form-control" />
+        <span asp-validation-for="GodinaIzdanja" class="text-danger"></span>
+    </div>
+
 
     <div class="form-group">
         <label asp-for="Opis" class="control-label"></label>

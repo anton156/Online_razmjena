@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Http;
 using System.IO;
 using Microsoft.AspNetCore.Hosting;
 using Online_razmjena.Repository;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace Online_razmjena.Controllers
 {
@@ -68,6 +69,8 @@ namespace Online_razmjena.Controllers
         [Authorize]
         public async Task<ViewResult> Create(bool isSuccess = false, int sliciceId = 0)
         {
+            ViewData["AlbumId"] = new SelectList(_context.Albumi, "AlbumId", "Naziv");
+            ViewData["ZamjenaId"] = new SelectList(_context.Zamjene, "ZamjenaId", "Način");
             var model = new SliciceModel();
 
             ViewBag.IsSuccess = isSuccess;

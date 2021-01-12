@@ -54,24 +54,40 @@
                     <span class="monospaced">@Model.Kontakt</span>
                 </div>
             </div>
+            <div class="row">
+                <div class="col-md-12 text-primary">
+                    <span class="label label-primary">Izdavač: </span>
+                    <span class="monospaced">@Model.Izdavac</span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 text-primary">
+                    <span class="label label-primary">Album i godina: </span>
+                    <span class="monospaced">@Html.DisplayFor(model => model.AlbumModel.Naziv)  (@Model.GodinaIzdanja)</span>
+                </div>
+            </div>
 
             <div class="row">
                 <div class="col-md-12">
-                    <p class="description"> Opis:
+                    <p class="description">
+                        Opis:
                         @Model.Opis
                     </p>
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-12">
-                    <p class="description">Dodatne Informacije:
+                    <p class="description">
+                        Dodatne Informacije:
                         @Model.DodatneInformacije
                     </p>
                 </div>
             </div>
 
             <hr />
-
+            <ul class="list-group">
+                <li class="list-group-item"><span class="font-weight-bold">Način Zamjene</span> @Html.DisplayFor(model => model.ZamjenaModel.ZamjenaId)</li>
+            </ul>
             <ul class="list-group">
                 <li class="list-group-item"><span class="font-weight-bold">Brojevi sličica</span> @Model.BrojSlicica</li>
             </ul>
