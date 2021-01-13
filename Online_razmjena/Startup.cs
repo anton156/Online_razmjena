@@ -50,6 +50,8 @@ namespace Online_razmjena
             services.AddControllersWithViews();
             services.AddRazorPages();
             services.AddScoped<ISliciceRepository, SliciceRepository>();
+            services.AddScoped<ZamjenaRepository, ZamjenaRepository>();
+            services.AddScoped<AlbumRepository, AlbumRepository>();
             services.AddTransient<IPostRepository, PostRepository>();
             services.AddTransient<IFileManager, FileManager>();
         }

@@ -15,9 +15,9 @@ namespace Online_razmjena.Data
         public string Izdavac { get; set; }
         public int GodinaIzdanja { get; set; }
         public int AlbumId { get; set; }
-        public virtual AlbumModel AlbumModel { get; set; }
+        public Album Album { get; set; }
         public int ZamjenaId { get; set; }
-        public virtual ZamjenaModel ZamjenaModel { get; set; }
+        public Zamjena Zamjena { get; set; }
         public string Opis { get; set; }
         public string Kontakt { get; set; }
         public string DodatneInformacije { get; set; }

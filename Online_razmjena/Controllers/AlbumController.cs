@@ -55,7 +55,7 @@ namespace Online_razmjena.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("AlbumId,Naziv")] AlbumModel albumModel)
+        public async Task<IActionResult> Create([Bind("AlbumId,Naziv")] Album albumModel)
         {
             if (ModelState.IsValid)
             {
@@ -87,7 +87,7 @@ namespace Online_razmjena.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("AlbumId,Naziv")] AlbumModel albumModel)
+        public async Task<IActionResult> Edit(int id, [Bind("AlbumId,Naziv")] Album albumModel)
         {
             if (id != albumModel.AlbumId)
             {

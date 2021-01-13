@@ -21,9 +21,9 @@ namespace Online_razmjena.Models
         [Display(Name = "Godina izdanja")]
         public int GodinaIzdanja { get; set; }
         public int AlbumId { get; set; }
-        public virtual AlbumModel AlbumModel { get; set; }
+        public string Album { get; set; }
         public int ZamjenaId { get; set; }
-        public virtual ZamjenaModel ZamjenaModel { get; set; }
+        public string Zamjena { get; set; }
         [StringLength(10000)]
         public string Opis { get; set; }
 

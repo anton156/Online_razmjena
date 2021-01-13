@@ -18,12 +18,16 @@ namespace Online_razmjena.Controllers
     {
         
         private readonly ISliciceRepository _sliciceRepository = null;
+        private readonly ZamjenaRepository _zamjenaRepository = null;
+        private readonly AlbumRepository _albumRepository = null;
         private readonly ApplicationDbContext _context = null;
         private readonly IWebHostEnvironment _webHostEnvironment;
 
         public SliciceController(ISliciceRepository sliciceRepository,
-            IWebHostEnvironment webHostEnvironment, ApplicationDbContext context)
+            IWebHostEnvironment webHostEnvironment, ApplicationDbContext context,ZamjenaRepository zamjenaRepository, AlbumRepository albumRepository)
         {
+            _zamjenaRepository = zamjenaRepository;
+            _albumRepository = albumRepository;
             _context = context;
             _sliciceRepository = sliciceRepository;
             _webHostEnvironment = webHostEnvironment;
@@ -69,10 +73,10 @@ namespace Online_razmjena.Controllers
         [Authorize]
         public async Task<ViewResult> Create(bool isSuccess = false, int sliciceId = 0)
         {
-            ViewData["AlbumId"] = new SelectList(_context.Albumi, "AlbumId", "Naziv");
-            ViewData["ZamjenaId"] = new SelectList(_context.Zamjene, "ZamjenaId", "Način");
+            
             var model = new SliciceModel();
-
+            ViewBag.Albumi = new SelectList( await _albumRepository.GetAlbum(), "AlbumId","Naziv");
+            ViewBag.Zamjene = new SelectList( await _zamjenaRepository.GetZamjena(), "ZamjenaId","Nacin");
             ViewBag.IsSuccess = isSuccess;
             ViewBag.SliciceId = sliciceId;
             return View(model);
