@@ -45,7 +45,7 @@ namespace Online_razmjena
                 options.AddPolicy("RequireAdmin", policy =>
                        policy.RequireRole("Admin"));
                 options.AddPolicy("RequireKorisnik", policy =>
-                       policy.RequireRole("Korisnik, Admin"));
+                       policy.RequireRole("Korisnik", "Admin"));
             });
             services.AddControllersWithViews();
             services.AddRazorPages();

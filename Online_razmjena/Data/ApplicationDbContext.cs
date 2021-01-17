@@ -24,6 +24,8 @@ namespace Online_razmjena.Data
         public DbSet<SubComment> SubComments { get; set; }
         public DbSet<Album> Albumi { get; set; }
         public DbSet<Zamjena> Zamjene { get; set; }
+        public DbSet<PorukaModel> Poruke { get; set; }
+
 
     }
 }

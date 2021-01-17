@@ -28,19 +28,25 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Slicice" asp-action="Index">Sličice</a>
                         </li>
-                        @if ((await AuthorizationService.AuthorizeAsync(User, "RequireAdmin")).Succeeded)
+                        @if ((await AuthorizationService.AuthorizeAsync(User, "RequireKorisnik")).Succeeded)
                         {
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Role" asp-action="Index">Role</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Album" asp-action="Index">Albumi</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Zamjena" asp-action="Index">Zamjene</a>
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Poruka" asp-action="Index">Privatna poruka</a>
                             </li>
                         }
-                    </ul>
+                            @if ((await AuthorizationService.AuthorizeAsync(User, "RequireAdmin")).Succeeded)
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Role" asp-action="Index">Role</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Album" asp-action="Index">Albumi</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Zamjena" asp-action="Index">Zamjene</a>
+                                </li>
+                            }
+                        </ul>
                     <partial name="_LoginPartial" />
                 </div>
             </div>

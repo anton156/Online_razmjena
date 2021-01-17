@@ -1,0 +1,41 @@
+﻿@model Online_razmjena.Models.PorukaModel
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Poruka</h1>
+
+<div>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Korisnik)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Korisnik)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Primatelj)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Primatelj)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Naslov)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Naslov)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Tekst)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Tekst)
+        </dd>
+    </dl>
+</div>
+<div>
+    @*<a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |*@
+    <a asp-action="Index">Natrag</a>
+</div>
