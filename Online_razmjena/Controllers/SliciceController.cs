@@ -132,6 +132,8 @@ namespace Online_razmjena.Controllers
             {
                 return NotFound();
             }
+            ViewBag.Albumi = new SelectList(await _albumRepository.GetAlbum(), "AlbumId", "Naziv");
+            ViewBag.Zamjene = new SelectList(await _zamjenaRepository.GetZamjena(), "ZamjenaId", "Nacin");
             return View(slicice);
         }
 
@@ -140,7 +142,7 @@ namespace Online_razmjena.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id, Naziv, BrojSlicica, Opis, Kontakt, DodatneInformacije, CoverImageUrl, CreatedOn, UpdatedOn, Korisnik, GodinaIzdanja, Izdavac, AlbumId, ZamjenaId")] SliciceModel slicice)
+        public async Task<IActionResult> Edit(int id, [Bind("Id, Naziv, BrojSlicica, Opis, Kontakt, DodatneInformacije, CoverImageUrl, CreatedOn, UpdatedOn, Korisnik, GodinaIzdanja, Izdavac, AlbumId, ZamjenaId")] Slicice slicice)
         {
             if (id != slicice.Id)
             {
