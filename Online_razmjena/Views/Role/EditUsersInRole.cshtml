@@ -7,7 +7,12 @@
     @using (Html.BeginForm("EditUsersInRole", "Role", FormMethod.Get))
     {
         @Html.Hidden("roleId")<input style="margin-left:4px;" hidden class="form-control" value="@roleId" />
-        @Html.TextBox("search")<input style="margin-left:4px;" type="submit" asp-route-roleId="@roleId" value="Pretraži" />
+                              <div class="input-group">
+                                  @Html.TextBox("search")
+                                  <div class="input-group-append">
+                                      <button class="btn btn-primary" type="submit">Search</button>
+                                  </div>
+                              </div>
     }
 </p>
 <form method="post">

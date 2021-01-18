@@ -56,7 +56,7 @@ namespace Online_razmjena.Repository
 
         }
 
-        public async Task<List<SliciceModel>> Index(string search)
+        public async Task<List<SliciceModel>> Index(string search, string select, string broj)
         {
             if (!String.IsNullOrEmpty(search))
             {

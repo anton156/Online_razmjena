@@ -8,7 +8,7 @@ namespace Online_razmjena.Repository
     {
         Task<int> Create(SliciceModel model);
         Task<SliciceModel> GetSliciceById(int id);
-        Task<List<SliciceModel>> Index(string search);
+        Task<List<SliciceModel>> Index(string search, string select, string broj);
         List<SliciceModel> SearchSlicice(string Naziv);
     }
 }

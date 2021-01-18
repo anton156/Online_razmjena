@@ -20,9 +20,20 @@ namespace Online_razmjena.Controllers
         }
 
         // GET: Zamjena
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string search)
         {
-            return View(await _context.Zamjene.ToListAsync());
+            if (!String.IsNullOrEmpty(search))
+            {
+                var album = _context.Zamjene.AsNoTracking().Where(x => x.Nacin.Contains(search)).OrderBy(s => s.ZamjenaId);
+                //var model = await PagingList.CreateAsync(roles, 5, page);
+                return View(album);
+            }
+            else
+            {
+                var album = _context.Zamjene.AsNoTracking().OrderBy(s => s.ZamjenaId);
+                //var model = await PagingList.CreateAsync(roles, 5, page);
+                return View(album);
+            }
         }
 
         // GET: Zamjena/Details/5

@@ -11,6 +11,7 @@ using System.IO;
 using Microsoft.AspNetCore.Hosting;
 using Online_razmjena.Repository;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
 
 namespace Online_razmjena.Controllers
 {
@@ -34,16 +35,17 @@ namespace Online_razmjena.Controllers
         }
 
         
-        public async Task<ViewResult> Index(string search)
+        public async Task<ViewResult> Index(string search, string select, string broj)
         {
-            var data = await _sliciceRepository.Index(search);
+            ViewBag.Albumi = new SelectList(_context.Albumi, "Naziv", "Naziv");
+            var data = await _sliciceRepository.Index(search,select,broj);
 
             return View(data);
         }
         [Authorize]
-        public async Task<ViewResult> MySlicice(string search)
+        public async Task<ViewResult> MySlicice(string search, string select, string broj)
         {
-            var data = await _sliciceRepository.Index(search);
+            var data = await _sliciceRepository.Index(search,select,broj);
 
             return View(data);
         }
@@ -117,6 +119,55 @@ namespace Online_razmjena.Controllers
             }
 
             return View();
+        }
+        public async Task<IActionResult> Edit(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var slicice = await _context.Slicice.FindAsync(id);
+            if (slicice == null)
+            {
+                return NotFound();
+            }
+            return View(slicice);
+        }
+
+        // POST: Album/Edit/5
+        // To protect from overposting attacks, enable the specific properties you want to bind to.
+        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(int id, [Bind("Id, Naziv, BrojSlicica, Opis, Kontakt, DodatneInformacije, CoverImageUrl, CreatedOn, UpdatedOn, Korisnik, GodinaIzdanja, Izdavac, AlbumId, ZamjenaId")] SliciceModel slicice)
+        {
+            if (id != slicice.Id)
+            {
+                return NotFound();
+            }
+
+            if (ModelState.IsValid)
+            {
+                //try
+                //{
+                    _context.Update(slicice);
+                    await _context.SaveChangesAsync();
+                //}
+                //catch (DbUpdateConcurrencyException)
+                //{
+                //    if (!SliciceModelExists(slicice.Id))
+                //    {
+                //        return NotFound();
+                //    }
+                //    else
+                //    {
+                //        throw;
+                //    }
+                //}
+                return RedirectToAction(nameof(Index));
+            }
+            return View(slicice);
         }
 
         private async Task<string> UploadImage(string folderPath, IFormFile file)

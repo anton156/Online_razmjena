@@ -6,7 +6,19 @@
 <p>
     @using (Html.BeginForm("Index", "Slicice", FormMethod.Get))
     {
-        @Html.TextBox("search")<input style="margin-left:4px;" type="submit" value="Pretraži" />
+
+    <div class="input-group">
+        <span class="font-weight-bold">Naziv: </span>&nbsp;&nbsp;
+        @Html.TextBox("search")&nbsp;&nbsp;
+        <span class="font-weight-bold">Album: </span>&nbsp;&nbsp;
+        @Html.DropDownList("select", ViewBag.Albumi as SelectList)&nbsp;&nbsp;
+        <span class="font-weight-bold">Broj Sličice: </span>&nbsp;&nbsp;
+        @Html.TextBox("broj")
+        <div class="input-group-append">
+            <button class="btn btn-primary" type="submit">Search</button>
+        </div>
+    </div>
+
     }
 </p>
 <div class="container">

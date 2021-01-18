@@ -10,15 +10,18 @@
                 <a asp-route="Details" asp-route-id="@Model.Id"
                    class="btn btn-sm btn-outline-secondary">Detalji</a>
             </div>
-            @if ((await AuthorizationService.AuthorizeAsync(User, "RequireAdmin")).Succeeded)
-            {
-                <form asp-action="Delete" asp-route-id="@Model.Id" method="post">
-                    <button type="submit" class="btn btn-sm btn-danger">
-                        Izbriši
-                    </button>
-                </form>
-            }
+            <div class="btn-group">
+                <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-info">Edit</a>
+                </div>
+                @if ((await AuthorizationService.AuthorizeAsync(User, "RequireAdmin")).Succeeded)
+                {
+                    <form asp-action="Delete" asp-route-id="@Model.Id" method="post">
+                        <button type="submit" class="btn btn-sm btn-danger">
+                            Izbriši
+                        </button>
+                    </form>
+                }
                 <small class="text-muted">@(string.IsNullOrEmpty(Model.Kontakt) ? "NA" : Model.Kontakt)</small>
             </div>
-    </div>
+        </div>
 </div>

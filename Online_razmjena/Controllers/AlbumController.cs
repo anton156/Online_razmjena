@@ -20,9 +20,20 @@ namespace Online_razmjena.Controllers
         }
 
         // GET: Album
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string search)
         {
-            return View(await _context.Albumi.ToListAsync());
+            if (!String.IsNullOrEmpty(search))
+            {
+                var album = _context.Albumi.AsNoTracking().Where(x => x.Naziv.Contains(search)).OrderBy(s => s.AlbumId);
+                //var model = await PagingList.CreateAsync(roles, 5, page);
+                return View(album);
+            }
+            else
+            {
+                var album = _context.Albumi.AsNoTracking().OrderBy(s => s.AlbumId);
+                //var model = await PagingList.CreateAsync(roles, 5, page);
+                return View(album);
+            }
         }
 
         // GET: Album/Details/5

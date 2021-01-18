@@ -37,13 +37,7 @@
                             @if ((await AuthorizationService.AuthorizeAsync(User, "RequireAdmin")).Succeeded)
                             {
                                 <li class="nav-item">
-                                    <a class="nav-link text-dark" asp-area="" asp-controller="Role" asp-action="Index">Role</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link text-dark" asp-area="" asp-controller="Album" asp-action="Index">Albumi</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link text-dark" asp-area="" asp-controller="Zamjena" asp-action="Index">Zamjene</a>
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Role" asp-action="Index">Admin Panel</a>
                                 </li>
                             }
                         </ul>
