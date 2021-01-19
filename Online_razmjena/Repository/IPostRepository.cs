@@ -8,7 +8,7 @@ namespace Online_razmjena.Repository
     public interface IPostRepository
     {
         void AddPost(Post post);
-        List<Post> GetAllPosts();
+        List<Post> GetAllPosts(string search);
         Post GetPost(int id);
         void RemovePost(int id);
         Task<bool> SaveChangesAsync();

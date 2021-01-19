@@ -70,6 +70,7 @@
 
     <hr />
     <div class="comment-section">
+        <h4>Komentari</h4>
         @{
             await Html.RenderPartialAsync("_MainComment", new CommentViewModel { PostId = Model.Id, MainCommentId = 0, Korisnik = Model.Korisnik });
         }

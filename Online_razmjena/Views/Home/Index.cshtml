@@ -3,12 +3,19 @@
 }
 @model IEnumerable<Post>
 
-@*<p>
-    @using (Html.BeginForm("Index", "Slicice", FormMethod.Get))
+<p>
+    @using (Html.BeginForm("Index", "Home", FormMethod.Get))
     {
-        @Html.TextBox("search")<input style="margin-left:4px;" type="submit" value="Pretraži" />
+
+        <div class="input-group">
+            @Html.TextBox("search")
+            <div class="input-group-append">
+                <button class="btn btn-primary" type="submit">Search</button>
+            </div>
+        </div>
+
     }
-</p>*@
+</p>
 <div class="container">
     <h3 class="display-4">Objave</h3>
     <div class="row">

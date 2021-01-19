@@ -21,9 +21,17 @@ namespace Online_razmjena.Repository
             _contex.Posts.Add(post);
 
         }
-        public List<Post> GetAllPosts()
+        public List<Post> GetAllPosts(string search)
         {
-            return _contex.Posts.ToList();
+            if (!String.IsNullOrEmpty(search))
+            {
+                return _contex.Posts.Where(x => x.Naziv.Contains(search)).ToList();
+            }
+            else
+            {
+                return _contex.Posts.ToList();
+
+            }
 
         }
 

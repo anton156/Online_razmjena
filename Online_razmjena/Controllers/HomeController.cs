@@ -27,9 +27,9 @@ namespace Online_razmjena.Controllers
             _fileManager = fileManager;
         }
 
-        public IActionResult Index()
+        public IActionResult Index(string search)
         {
-            var posts = _repo.GetAllPosts();
+            var posts = _repo.GetAllPosts(search);
             return View(posts);
         }
         public IActionResult Post(int id)
