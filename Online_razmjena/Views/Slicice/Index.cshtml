@@ -11,7 +11,7 @@
         <span class="font-weight-bold">Naziv: </span>&nbsp;&nbsp;
         @Html.TextBox("search")&nbsp;&nbsp;
         <span class="font-weight-bold">Album: </span>&nbsp;&nbsp;
-        @Html.DropDownList("select", ViewBag.Albumi as SelectList, htmlAttributes: new { @class = "form-control", id = "select2" })&nbsp;&nbsp;
+        @Html.DropDownList("select", ViewBag.Albumi as SelectList, "", htmlAttributes: new { @class = "form-control", id = "select2" })&nbsp;&nbsp;
         <span class="font-weight-bold">Broj Sličice: </span>&nbsp;&nbsp;
         @Html.TextBox("broj")
         <div class="input-group-append">
