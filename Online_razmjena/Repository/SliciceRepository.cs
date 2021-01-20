@@ -60,10 +60,116 @@ namespace Online_razmjena.Repository
         {
             if (!String.IsNullOrEmpty(search))
             {
-                return await _context.Slicice.Where(x => x.Naziv.Contains(search))
+                if (!String.IsNullOrEmpty(select))
+                {
+                    if (!String.IsNullOrEmpty(broj))
+                    {
+                        return await _context.Slicice.Where(x => x.Naziv.Contains(search)).Where(x => x.Album.Naziv.Contains(select)).Where(x => x.BrojSlicica.Contains(broj))
+                          .Select(slicice => new SliciceModel()
+                          {
+                              Kontakt = slicice.Kontakt,
+                              Album = slicice.Album.Naziv,
+                              Korisnik = slicice.Korisnik,
+                              Naziv = slicice.Naziv,
+                              Opis = slicice.Opis,
+                              Id = slicice.Id,
+                              BrojSlicica = slicice.BrojSlicica,
+                              DodatneInformacije = slicice.DodatneInformacije,
+                              CoverImageUrl = slicice.CoverImageUrl
+                          }).ToListAsync();
+                    }
+                    else
+                    {
+                        return await _context.Slicice.Where(x => x.Naziv.Contains(search)).Where(x => x.Album.Naziv.Contains(select))
+                          .Select(slicice => new SliciceModel()
+                          {
+                              Kontakt = slicice.Kontakt,
+                              Album = slicice.Album.Naziv,
+                              Korisnik = slicice.Korisnik,
+                              Naziv = slicice.Naziv,
+                              Opis = slicice.Opis,
+                              Id = slicice.Id,
+                              BrojSlicica = slicice.BrojSlicica,
+                              DodatneInformacije = slicice.DodatneInformacije,
+                              CoverImageUrl = slicice.CoverImageUrl
+                          }).ToListAsync();
+                    }
+                }
+                else if (!String.IsNullOrEmpty(broj))
+                {
+                    return await _context.Slicice.Where(x => x.Naziv.Contains(search)).Where(x => x.BrojSlicica.Contains(broj))
+                      .Select(slicice => new SliciceModel()
+                      {
+                          Kontakt = slicice.Kontakt,
+                          Album = slicice.Album.Naziv,
+                          Korisnik = slicice.Korisnik,
+                          Naziv = slicice.Naziv,
+                          Opis = slicice.Opis,
+                          Id = slicice.Id,
+                          BrojSlicica = slicice.BrojSlicica,
+                          DodatneInformacije = slicice.DodatneInformacije,
+                          CoverImageUrl = slicice.CoverImageUrl
+                      }).ToListAsync();
+                }
+                else
+                {
+                    return await _context.Slicice.Where(x => x.Naziv.Contains(search))
+                      .Select(slicice => new SliciceModel()
+                      {
+                          Kontakt = slicice.Kontakt,
+                          Album = slicice.Album.Naziv,
+                          Korisnik = slicice.Korisnik,
+                          Naziv = slicice.Naziv,
+                          Opis = slicice.Opis,
+                          Id = slicice.Id,
+                          BrojSlicica = slicice.BrojSlicica,
+                          DodatneInformacije = slicice.DodatneInformacije,
+                          CoverImageUrl = slicice.CoverImageUrl
+                      }).ToListAsync();
+                }
+            }
+            else if (!String.IsNullOrEmpty(select))
+            {
+                if (!String.IsNullOrEmpty(broj))
+                {
+                    return await _context.Slicice.Where(x => x.Album.Naziv.Contains(select)).Where(x => x.BrojSlicica.Contains(broj))
+                      .Select(slicice => new SliciceModel()
+                      {
+                          Kontakt = slicice.Kontakt,
+                          Album = slicice.Album.Naziv,
+                          Korisnik = slicice.Korisnik,
+                          Naziv = slicice.Naziv,
+                          Opis = slicice.Opis,
+                          Id = slicice.Id,
+                          BrojSlicica = slicice.BrojSlicica,
+                          DodatneInformacije = slicice.DodatneInformacije,
+                          CoverImageUrl = slicice.CoverImageUrl
+                      }).ToListAsync();
+                }
+                else
+                {
+                    return await _context.Slicice.Where(x => x.Album.Naziv.Contains(select))
+                      .Select(slicice => new SliciceModel()
+                      {
+                          Kontakt = slicice.Kontakt,
+                          Album = slicice.Album.Naziv,
+                          Korisnik = slicice.Korisnik,
+                          Naziv = slicice.Naziv,
+                          Opis = slicice.Opis,
+                          Id = slicice.Id,
+                          BrojSlicica = slicice.BrojSlicica,
+                          DodatneInformacije = slicice.DodatneInformacije,
+                          CoverImageUrl = slicice.CoverImageUrl
+                      }).ToListAsync();
+                }
+            }
+            else if (!String.IsNullOrEmpty(broj))
+            {
+                return await _context.Slicice.Where(x => x.BrojSlicica.Contains(broj))
                   .Select(slicice => new SliciceModel()
                   {
                       Kontakt = slicice.Kontakt,
+                      Album = slicice.Album.Naziv,
                       Korisnik = slicice.Korisnik,
                       Naziv = slicice.Naziv,
                       Opis = slicice.Opis,
@@ -79,6 +185,7 @@ namespace Online_razmjena.Repository
                   .Select(slicice => new SliciceModel()
                   {
                       Kontakt = slicice.Kontakt,
+                      Album = slicice.Album.Naziv,
                       Korisnik = slicice.Korisnik,
                       Naziv = slicice.Naziv,
                       Opis = slicice.Opis,
