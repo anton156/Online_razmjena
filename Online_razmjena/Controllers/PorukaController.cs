@@ -52,10 +52,18 @@ namespace Online_razmjena.Controllers
         }
 
         // GET: Poruka/Create
-        public IActionResult Create()
+        public IActionResult Create(string? korisnik)
         {
-            ViewData["Primatelj"] = new SelectList(_context.Users, "UserName", "Email");
-            return View();
+            if (!String.IsNullOrEmpty(korisnik))
+            {
+                ViewBag.korisnik = korisnik;
+                return View();
+            }
+            else
+            {
+                ViewData["Primatelj"] = new SelectList(_context.Users, "UserName", "Email");
+                return View();
+            }
         }
 
         // POST: Poruka/Create

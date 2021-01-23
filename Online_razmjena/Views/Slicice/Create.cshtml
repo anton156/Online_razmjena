@@ -24,6 +24,13 @@
         <span asp-validation-for="Korisnik" class="text-danger"></span>
     </div>
     <div class="form-group">
+        <label asp-for="Filter" class="control-label"></label>
+        <select asp-for="Filter" class="form-control">
+            <option value="Prodajem">Prodajem</option>
+            <option value="Kupujem">Kupujem</option>
+        </select>
+    </div>
+    <div class="form-group">
         <label asp-for="Naziv" class="control-label"></label>
         <input asp-for="Naziv" class="form-control" />
         <span asp-validation-for="Naziv" class="text-danger"></span>

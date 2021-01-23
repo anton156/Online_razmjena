@@ -10,7 +10,7 @@
                               <div class="input-group">
                                   @Html.TextBox("search")
                                   <div class="input-group-append">
-                                      <button class="btn btn-primary" type="submit">Search</button>
+                                      <button class="btn btn-primary" type="submit">Pretraži</button>
                                   </div>
                               </div>
     }
@@ -18,7 +18,7 @@
 <form method="post">
     <div class="card">
         <div class="card-header">
-            <h2>Add or remove users from this role</h2>
+            <h2>Dodaj ili ukloni korisnika iz uloge</h2>
         </div>
         <div class="card-body">
             @for (int i = 0; i < Model.Count; i++)

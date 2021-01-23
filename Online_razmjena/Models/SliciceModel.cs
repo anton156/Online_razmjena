@@ -11,6 +11,8 @@ namespace Online_razmjena.Models
     public class SliciceModel
     {
         public int Id { get; set; }
+        [Required(ErrorMessage = "Odaberite kupnju ili prodaju")]
+        public string Filter { get; set; }
         [StringLength(200)]
         [Required(ErrorMessage = "Unesite naziv")]
         public string Naziv { get; set; }

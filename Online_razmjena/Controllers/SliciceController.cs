@@ -35,17 +35,17 @@ namespace Online_razmjena.Controllers
         }
 
         
-        public async Task<ViewResult> Index(string search, string select, string broj)
+        public async Task<ViewResult> Index(string search, string select, string broj , string filter)
         {
             ViewBag.Albumi = new SelectList(_context.Albumi, "Naziv", "Naziv");
-            var data = await _sliciceRepository.Index(search,select,broj);
+            var data = await _sliciceRepository.Index(search, select, broj, filter);
 
             return View(data);
         }
         [Authorize]
-        public async Task<ViewResult> MySlicice(string search, string select, string broj)
+        public async Task<ViewResult> MySlicice(string search, string select, string broj, string filter)
         {
-            var data = await _sliciceRepository.Index(search,select,broj);
+            var data = await _sliciceRepository.Index(search, select, broj, filter);
 
             return View(data);
         }

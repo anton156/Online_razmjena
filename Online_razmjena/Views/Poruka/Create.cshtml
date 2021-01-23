@@ -4,42 +4,50 @@
     ViewData["Title"] = "Create";
 }
 
-<h1>Create</h1>
-
-<h4>PorukaModel</h4>
+<h1>Nova Poruka</h1>
 <hr />
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">              
+            <div class="form-group">
                 <input asp-for="Korisnik" hidden class="form-control" value="@User.Identity.Name" />
                 <span asp-validation-for="Korisnik" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="Primatelj" class="control-label"></label>
-                <select asp-for="Primatelj" class="form-control" id="select2" asp-items="ViewBag.Primatelj"></select>
-                
-            </div>
-            <div class="form-group">
-                <label asp-for="Naslov" class="control-label"></label>
-                <input asp-for="Naslov" class="form-control" />
-                <span asp-validation-for="Naslov" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Tekst" class="control-label"></label>
-                <textarea asp-for="Tekst" class="form-control" ></textarea>
-                <span asp-validation-for="Tekst" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
+            @if (!String.IsNullOrEmpty(ViewBag.korisnik))
+            {
+                <div class="form-group">
+                    <input asp-for="Primatelj" readonly class="form-control" value="@ViewBag.korisnik" />
+                    <span asp-validation-for="Primatelj" class="text-danger"></span>
+                </div>
+            }
+            else
+            {
+                <div class="form-group">
+                    <label asp-for="Primatelj" class="control-label"></label>
+                    <select asp-for="Primatelj" class="form-control" id="select2" asp-items="ViewBag.Primatelj"></select>
+
+                </div>
+            }
+                <div class="form-group">
+                    <label asp-for="Naslov" class="control-label"></label>
+                    <input asp-for="Naslov" class="form-control" />
+                    <span asp-validation-for="Naslov" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Tekst" class="control-label"></label>
+                    <textarea asp-for="Tekst" class="form-control"></textarea>
+                    <span asp-validation-for="Tekst" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Pošalji" class="btn btn-primary" />
+                </div>
+            </form>
     </div>
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index">Natrag</a>
 </div>
 
 @section Scripts {

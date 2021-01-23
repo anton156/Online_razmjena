@@ -9,6 +9,7 @@ namespace Online_razmjena.Data
     public class Slicice
     {
         public int Id { get; set; }
+        public string Filter { get; set; }
         public string Naziv { get; set; }
         public string Korisnik { get; set; }
         public string BrojSlicica { get; set; }

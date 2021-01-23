@@ -24,6 +24,7 @@ namespace Online_razmjena.Repository
             var newSlicice = new Slicice()
             {
                 Kontakt = model.Kontakt,
+                Filter = model.Filter,
                 Izdavac = model.Izdavac,
                 GodinaIzdanja = model.GodinaIzdanja,
                 AlbumId = model.AlbumId,
@@ -56,7 +57,7 @@ namespace Online_razmjena.Repository
 
         }
 
-        public async Task<List<SliciceModel>> Index(string search, string select, string broj)
+        public async Task<List<SliciceModel>> Index(string search, string select, string broj, string filter)
         {
             if (!String.IsNullOrEmpty(search))
             {
@@ -64,10 +65,11 @@ namespace Online_razmjena.Repository
                 {
                     if (!String.IsNullOrEmpty(broj))
                     {
-                        return await _context.Slicice.Where(x => x.Naziv.Contains(search)).Where(x => x.Album.Naziv.Contains(select)).Where(x => x.BrojSlicica.Contains(broj))
+                        return await _context.Slicice.Where(x => x.Filter.Equals(filter)).Where(x => x.Naziv.Contains(search)).Where(x => x.Album.Naziv.Contains(select)).Where(x => x.BrojSlicica.Contains(broj))
                           .Select(slicice => new SliciceModel()
                           {
                               Kontakt = slicice.Kontakt,
+                              Filter = slicice.Filter,
                               Album = slicice.Album.Naziv,
                               Korisnik = slicice.Korisnik,
                               Naziv = slicice.Naziv,
@@ -80,10 +82,11 @@ namespace Online_razmjena.Repository
                     }
                     else
                     {
-                        return await _context.Slicice.Where(x => x.Naziv.Contains(search)).Where(x => x.Album.Naziv.Contains(select))
+                        return await _context.Slicice.Where(x => x.Filter.Equals(filter)).Where(x => x.Naziv.Contains(search)).Where(x => x.Album.Naziv.Contains(select))
                           .Select(slicice => new SliciceModel()
                           {
                               Kontakt = slicice.Kontakt,
+                              Filter = slicice.Filter,
                               Album = slicice.Album.Naziv,
                               Korisnik = slicice.Korisnik,
                               Naziv = slicice.Naziv,
@@ -97,10 +100,11 @@ namespace Online_razmjena.Repository
                 }
                 else if (!String.IsNullOrEmpty(broj))
                 {
-                    return await _context.Slicice.Where(x => x.Naziv.Contains(search)).Where(x => x.BrojSlicica.Contains(broj))
+                    return await _context.Slicice.Where(x => x.Filter.Equals(filter)).Where(x => x.Naziv.Contains(search)).Where(x => x.BrojSlicica.Contains(broj))
                       .Select(slicice => new SliciceModel()
                       {
                           Kontakt = slicice.Kontakt,
+                          Filter = slicice.Filter,
                           Album = slicice.Album.Naziv,
                           Korisnik = slicice.Korisnik,
                           Naziv = slicice.Naziv,
@@ -113,10 +117,11 @@ namespace Online_razmjena.Repository
                 }
                 else
                 {
-                    return await _context.Slicice.Where(x => x.Naziv.Contains(search))
+                    return await _context.Slicice.Where(x => x.Filter.Equals(filter)).Where(x => x.Naziv.Contains(search))
                       .Select(slicice => new SliciceModel()
                       {
                           Kontakt = slicice.Kontakt,
+                          Filter = slicice.Filter,
                           Album = slicice.Album.Naziv,
                           Korisnik = slicice.Korisnik,
                           Naziv = slicice.Naziv,
@@ -132,10 +137,11 @@ namespace Online_razmjena.Repository
             {
                 if (!String.IsNullOrEmpty(broj))
                 {
-                    return await _context.Slicice.Where(x => x.Album.Naziv.Contains(select)).Where(x => x.BrojSlicica.Contains(broj))
+                    return await _context.Slicice.Where(x => x.Filter.Equals(filter)).Where(x => x.Album.Naziv.Contains(select)).Where(x => x.BrojSlicica.Contains(broj))
                       .Select(slicice => new SliciceModel()
                       {
                           Kontakt = slicice.Kontakt,
+                          Filter = slicice.Filter,
                           Album = slicice.Album.Naziv,
                           Korisnik = slicice.Korisnik,
                           Naziv = slicice.Naziv,
@@ -148,10 +154,11 @@ namespace Online_razmjena.Repository
                 }
                 else
                 {
-                    return await _context.Slicice.Where(x => x.Album.Naziv.Contains(select))
+                    return await _context.Slicice.Where(x => x.Filter.Equals(filter)).Where(x => x.Album.Naziv.Contains(select))
                       .Select(slicice => new SliciceModel()
                       {
                           Kontakt = slicice.Kontakt,
+                          Filter = slicice.Filter,
                           Album = slicice.Album.Naziv,
                           Korisnik = slicice.Korisnik,
                           Naziv = slicice.Naziv,
@@ -165,10 +172,11 @@ namespace Online_razmjena.Repository
             }
             else if (!String.IsNullOrEmpty(broj))
             {
-                return await _context.Slicice.Where(x => x.BrojSlicica.Contains(broj))
+                return await _context.Slicice.Where(x => x.Filter.Equals(filter)).Where(x => x.BrojSlicica.Contains(broj))
                   .Select(slicice => new SliciceModel()
                   {
                       Kontakt = slicice.Kontakt,
+                      Filter = slicice.Filter,
                       Album = slicice.Album.Naziv,
                       Korisnik = slicice.Korisnik,
                       Naziv = slicice.Naziv,
@@ -181,10 +189,13 @@ namespace Online_razmjena.Repository
             }
             else
             {
-                return await _context.Slicice
+                if (!String.IsNullOrEmpty(filter))
+                {
+                    return await _context.Slicice.Where(x => x.Filter.Equals(filter))
                   .Select(slicice => new SliciceModel()
                   {
                       Kontakt = slicice.Kontakt,
+                      Filter = slicice.Filter,
                       Album = slicice.Album.Naziv,
                       Korisnik = slicice.Korisnik,
                       Naziv = slicice.Naziv,
@@ -194,6 +205,24 @@ namespace Online_razmjena.Repository
                       DodatneInformacije = slicice.DodatneInformacije,
                       CoverImageUrl = slicice.CoverImageUrl
                   }).ToListAsync();
+                }
+                else
+                {
+                    return await _context.Slicice.Where(x => x.Filter.Equals("Kupujem"))
+                  .Select(slicice => new SliciceModel()
+                  {
+                      Kontakt = slicice.Kontakt,
+                      Filter = slicice.Filter,
+                      Album = slicice.Album.Naziv,
+                      Korisnik = slicice.Korisnik,
+                      Naziv = slicice.Naziv,
+                      Opis = slicice.Opis,
+                      Id = slicice.Id,
+                      BrojSlicica = slicice.BrojSlicica,
+                      DodatneInformacije = slicice.DodatneInformacije,
+                      CoverImageUrl = slicice.CoverImageUrl
+                  }).ToListAsync();
+                }
 
             }
         }
@@ -203,6 +232,7 @@ namespace Online_razmjena.Repository
                  .Select(slicice => new SliciceModel()
                  {
                      Kontakt = slicice.Kontakt,
+                     Filter = slicice.Filter,
                      Izdavac = slicice.Izdavac,
                      GodinaIzdanja = slicice.GodinaIzdanja,
                      AlbumId = slicice.AlbumId,
