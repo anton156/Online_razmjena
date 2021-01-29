@@ -20,7 +20,7 @@ namespace Online_razmjena.Controllers
         }
 
         // GET: Album
-        public async Task<IActionResult> Index(string search)
+        public IActionResult Index(string search)
         {
             if (!String.IsNullOrEmpty(search))
             {
