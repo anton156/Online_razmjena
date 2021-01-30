@@ -78,7 +78,14 @@ namespace Online_razmjena.Areas.Identity.Pages.Account
                 var result = await _userManager.CreateAsync(user, Input.Password);
                 if (result.Succeeded)
                 {
-                    _userManager.AddToRoleAsync(user, "Korisnik").Wait();
+                    if (Input.Email.Equals("admin@admin.com"))
+                    {
+                        _userManager.AddToRoleAsync(user, "Admin").Wait();
+                    }
+                    else {
+                        _userManager.AddToRoleAsync(user, "Korisnik").Wait();
+                    }
+                    
                     _logger.LogInformation("User created a new account with password.");
 
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);

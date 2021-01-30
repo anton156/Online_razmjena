@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Online_razmjena.Models;
 using Online_razmjena.Models.Comments;
@@ -26,6 +27,13 @@ namespace Online_razmjena.Data
         public DbSet<Zamjena> Zamjene { get; set; }
         public DbSet<PorukaModel> Poruke { get; set; }
 
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
 
+            modelBuilder.Entity<IdentityRole>().HasData(
+                new IdentityRole { Name = "Admin", NormalizedName = "Admin".ToUpper() },
+                new IdentityRole { Name = "Korisnik", NormalizedName = "Korisnik".ToUpper() });
+        }
     }
 }
