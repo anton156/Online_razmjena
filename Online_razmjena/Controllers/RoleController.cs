@@ -11,7 +11,7 @@ using ReflectionIT.Mvc.Paging;
 
 namespace Online_razmjena.Controllers
 {
-    [Authorize(Roles="Admin")]
+    [Authorize(Roles = "Admin")]
     public class RoleController : Controller
     {
         RoleManager<IdentityRole> roleManager;

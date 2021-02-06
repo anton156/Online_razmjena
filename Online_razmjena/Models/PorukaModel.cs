@@ -18,5 +18,6 @@ namespace Online_razmjena.Models
         public string Naslov { get; set; }
         [Required(ErrorMessage = "Unesite ispravne podatke")]
         public string Tekst { get; set; }
+        public bool Procitano { get; set; } = false;
     }
 }
