@@ -3,14 +3,14 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>List of Roles</h1>
+<h1>Sve uloge</h1>
 <p>
     @using (Html.BeginForm("Index", "Role", FormMethod.Get))
     {
         <div class="input-group">
             @Html.TextBox("search")
             <div class="input-group-append">
-                <button class="btn btn-primary" type="submit">Search</button>
+                <button class="btn btn-primary" type="submit">Pretraži</button>
             </div>
         </div>
 
@@ -24,7 +24,7 @@
     <thead>
         <tr>
             <td>Id</td>
-            <td>Name</td>
+            <td>Naziv</td>
         </tr>
     </thead>
     <tbody>
