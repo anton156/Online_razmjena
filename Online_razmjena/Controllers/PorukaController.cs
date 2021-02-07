@@ -40,14 +40,18 @@ namespace Online_razmjena.Controllers
             {
                 return NotFound();
             }
-            var Procitaj = _context.Poruke.Where(x => x.Id == id).ToList();
-            foreach (var procitano in Procitaj)
-            {
-                procitano.Procitano = true;
-            }
-            await _context.SaveChangesAsync();
+            
             var porukaModel = await _context.Poruke
                 .FirstOrDefaultAsync(m => m.Id == id);
+            if (porukaModel.Procitano == false)
+            {
+                var Procitaj = _context.Poruke.Where(x => x.Id == id).ToList();
+                foreach (var procitano in Procitaj)
+                {
+                    procitano.Procitano = true;
+                }
+                await _context.SaveChangesAsync();
+            }
             if (porukaModel == null)
             {
                 return NotFound();
