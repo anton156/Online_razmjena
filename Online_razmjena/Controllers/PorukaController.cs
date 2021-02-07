@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -15,10 +16,12 @@ namespace Online_razmjena.Controllers
     public class PorukaController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly UserManager<ApplicationUser> userManager;
 
-        public PorukaController(ApplicationDbContext context)
+        public PorukaController(ApplicationDbContext context, UserManager<ApplicationUser> userManager)
         {
             _context = context;
+            this.userManager = userManager;
         }
 
         // GET: Poruka
@@ -49,6 +52,11 @@ namespace Online_razmjena.Controllers
                 foreach (var procitano in Procitaj)
                 {
                     procitano.Procitano = true;
+                }
+                var OduzmiNeProc = userManager.Users.Where(x => porukaModel.Primatelj == x.Email).ToList();
+                foreach (var neproc in OduzmiNeProc)
+                {
+                    neproc.NeProcitano = neproc.NeProcitano - 1;
                 }
                 await _context.SaveChangesAsync();
             }
@@ -98,6 +106,11 @@ namespace Online_razmjena.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Korisnik,Primatelj,Naslov,Tekst")] PorukaModel porukaModel)
         {
+            var DodajNeProc = userManager.Users.Where(x => porukaModel.Primatelj == x.Email).ToList();
+            foreach (var neproc in DodajNeProc)
+            {
+                neproc.NeProcitano = neproc.NeProcitano + 1;
+            }
             if (ModelState.IsValid)
             {
                 _context.Add(porukaModel);

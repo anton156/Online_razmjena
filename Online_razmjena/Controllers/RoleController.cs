@@ -8,6 +8,7 @@ using Online_razmjena.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
 using ReflectionIT.Mvc.Paging;
+using Online_razmjena.Data;
 
 namespace Online_razmjena.Controllers
 {
@@ -15,8 +16,8 @@ namespace Online_razmjena.Controllers
     public class RoleController : Controller
     {
         RoleManager<IdentityRole> roleManager;
-        private readonly UserManager<IdentityUser> userManager;
-        public RoleController(RoleManager<IdentityRole> roleManager, UserManager<IdentityUser> userManager)
+        private readonly UserManager<ApplicationUser> userManager;
+        public RoleController(RoleManager<IdentityRole> roleManager, UserManager<ApplicationUser> userManager)
         {
             this.roleManager = roleManager;
             this.userManager = userManager;

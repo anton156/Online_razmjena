@@ -35,7 +35,7 @@ namespace Online_razmjena
                      Configuration.GetConnectionString("DefaultConnection")));
             services.AddDatabaseDeveloperPageExceptionFilter();
 
-            services.AddIdentity<IdentityUser, IdentityRole>(options =>
+            services.AddIdentity<ApplicationUser, IdentityRole>(options =>
             {
                 options.SignIn.RequireConfirmedAccount = false;
                 options.Password.RequireUppercase = false;
@@ -60,6 +60,7 @@ namespace Online_razmjena
             services.AddScoped<AlbumRepository, AlbumRepository>();
             services.AddTransient<IPostRepository, PostRepository>();
             services.AddTransient<IFileManager, FileManager>();
+            services.AddScoped<IUserClaimsPrincipalFactory<ApplicationUser>, AppClaimsPrincipalFactory>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

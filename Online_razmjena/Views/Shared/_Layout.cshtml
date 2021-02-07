@@ -31,7 +31,7 @@
                         @if ((await AuthorizationService.AuthorizeAsync(User, "RequireKorisnik")).Succeeded)
                         {
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Poruka" asp-action="Index">Privatna poruka</a>
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Poruka" asp-action="Index">Inbox @User.FindFirst("neprocitano").Value</a>
                             </li>
                         }
                             @if ((await AuthorizationService.AuthorizeAsync(User, "RequireAdmin")).Succeeded)
