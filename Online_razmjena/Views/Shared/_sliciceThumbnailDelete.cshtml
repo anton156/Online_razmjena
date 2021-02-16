@@ -1,7 +1,7 @@
 ﻿@model SliciceModel
 
 <div class="card mb-4 shadow-sm">
-    <img src="@(string.IsNullOrEmpty(Model.CoverImageUrl) ? "/images/noimage.png" : Model.CoverImageUrl)"  width="338" height="200" />
+    <img src="@(string.IsNullOrEmpty(Model.CoverImageUrl) ? "/images/noimage.png" : Model.CoverImageUrl)"   height="200" />
     <div class="card-body">
         <h6 class="card-title text-danger">@(string.IsNullOrEmpty(Model.Filter) ? "Naziv nije dostupan" : Model.Filter)</h6>
         <h3 class="card-title">@(string.IsNullOrEmpty(Model.Naziv) ? "Naziv nije dostupan" : Model.Naziv)</h3>
