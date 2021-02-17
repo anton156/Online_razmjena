@@ -59,6 +59,7 @@ namespace Online_razmjena.Controllers
                     neproc.NeProcitano = neproc.NeProcitano - 1;
                 }
                 await _context.SaveChangesAsync();
+                await HttpContext.RefreshLoginAsync();
             }
             if (porukaModel == null)
             {
