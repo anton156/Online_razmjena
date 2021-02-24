@@ -254,6 +254,43 @@ namespace Online_razmjena.Repository
                      }).ToList()
                  }).FirstOrDefaultAsync();
         }
+        public async Task<List<SliciceModel>> MySlicice(string search)
+        {
+            if (!String.IsNullOrEmpty(search))
+            {
+                return await _context.Slicice.Where(x => x.Naziv.Contains(search))
+                          .Select(slicice => new SliciceModel()
+                          {
+                              Kontakt = slicice.Kontakt,
+                              Filter = slicice.Filter,
+                              Album = slicice.Album.Naziv,
+                              Korisnik = slicice.Korisnik,
+                              Naziv = slicice.Naziv,
+                              Opis = slicice.Opis,
+                              Id = slicice.Id,
+                              BrojSlicica = slicice.BrojSlicica,
+                              DodatneInformacije = slicice.DodatneInformacije,
+                              CoverImageUrl = slicice.CoverImageUrl
+                          }).ToListAsync();
+            }
+            else
+            {
+                return await _context.Slicice
+                      .Select(slicice => new SliciceModel()
+                      {
+                          Kontakt = slicice.Kontakt,
+                          Filter = slicice.Filter,
+                          Album = slicice.Album.Naziv,
+                          Korisnik = slicice.Korisnik,
+                          Naziv = slicice.Naziv,
+                          Opis = slicice.Opis,
+                          Id = slicice.Id,
+                          BrojSlicica = slicice.BrojSlicica,
+                          DodatneInformacije = slicice.DodatneInformacije,
+                          CoverImageUrl = slicice.CoverImageUrl
+                      }).ToListAsync();
+            }
+        }
 
         public List<SliciceModel> SearchSlicice(string Naziv)
         {

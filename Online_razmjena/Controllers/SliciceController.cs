@@ -43,9 +43,9 @@ namespace Online_razmjena.Controllers
             return View(data);
         }
         [Authorize]
-        public async Task<ViewResult> MySlicice(string search, string select, string broj, string filter)
+        public async Task<ViewResult> MySlicice(string search)
         {
-            var data = await _sliciceRepository.Index(search, select, broj, filter);
+            var data = await _sliciceRepository.MySlicice(search);
 
             return View(data);
         }

@@ -10,5 +10,6 @@ namespace Online_razmjena.Repository
         Task<SliciceModel> GetSliciceById(int id);
         Task<List<SliciceModel>> Index(string search, string select, string broj, string filter);
         List<SliciceModel> SearchSlicice(string Naziv);
+        Task<List<SliciceModel>> MySlicice(string search);
     }
 }
