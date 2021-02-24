@@ -142,7 +142,7 @@ namespace Online_razmjena.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id, Naziv, BrojSlicica, Opis, Kontakt, DodatneInformacije, CoverImageUrl, CreatedOn, UpdatedOn, Korisnik, GodinaIzdanja, Izdavac, AlbumId, ZamjenaId")] Slicice slicice)
+        public async Task<IActionResult> Edit(int id, [Bind("Id, Naziv, BrojSlicica, Opis, Kontakt, DodatneInformacije, CoverImageUrl, CreatedOn, UpdatedOn, Korisnik, GodinaIzdanja, Izdavac, AlbumId, ZamjenaId, Filter")] Slicice slicice)
         {
             if (id != slicice.Id)
             {
